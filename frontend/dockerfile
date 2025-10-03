@@ -1,0 +1,31 @@
+# Stage 1: Build
+FROM node:18 AS build
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy all source files
+COPY . .
+
+# Build the frontend
+RUN npm run build
+
+# Stage 2: Serve
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install serve globally to serve static files
+RUN npm install -g serve
+
+# Copy build from previous stage
+COPY --from=build /app/dist ./dist
+
+# Expose port for frontend
+EXPOSE 3000
+
+# Start the frontend
+CMD ["serve", "-s", "dist", "-l", "3000"]
