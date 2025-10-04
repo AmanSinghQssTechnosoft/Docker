@@ -5,7 +5,7 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/users")
+    fetch("http://localhost:5000/api/users")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch users");
         return res.json();

@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  # 🐘 PostgreSQL Database
+  postgres:
+    image: postgres:18
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: aman1333
+      POSTGRES_DB: aman
+    ports:
+      - "5432:5432"          # Host port : Container port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data        # Named volume
+      - ./postgres/init:/docker-entrypoint-initdb.d  # Init SQL scripts
+
+  # ⚙️ Backend (Node.js / Express)
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DB_USER: postgres
+      DB_PASSWORD: aman1333
+      DB_NAME: aman
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DATABASE_URL: postgres://postgres:aman1333@postgres:5432/aman
+    ports:
+      - "5000:5000"          # Host port : Container port (same inside container)
+    command: ["npm", "start"]
+    working_dir: /app
+
+  # ⚛️ Frontend (React)
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"          # Host port : Container port
+    environment:
+      REACT_APP_API_URL: http://backend:5000  # Use container name + backend port
+    stdin_open: true
+    tty: true
+
+# 🧱 Named volume for Postgres persistence
+volumes:
+  postgres_data:
