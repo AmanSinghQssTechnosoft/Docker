@@ -25,6 +25,7 @@ function App() {
             <th>Email</th>
             <th>Ages</th>
             <th>Created At</th>
+            
           </tr>
         </thead>
         <tbody>
