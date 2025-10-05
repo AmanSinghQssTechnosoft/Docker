@@ -21,19 +21,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          #cache: 'npm'
 
-      - name: "Install Backend Dependencies"
+      - name: Install Backend Dependencies
         working-directory: ./backend
         run: npm install
 
-      - name: "Install Frontend Dependencies"
+      - name: Install Frontend Dependencies
         working-directory: ./frontend
         run: npm install
 
-      - name: "Build Frontend"
+      - name: Build Frontend
         working-directory: ./frontend
         run: npm run build
 
-      - name: "Skipping tests (no test setup yet)"
+      - name: Skipping tests (no test setup yet)
         run: echo "No tests configured yet — skipping"
