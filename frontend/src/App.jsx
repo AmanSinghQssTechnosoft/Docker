@@ -21,10 +21,11 @@ function App() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Names</th>
             <th>Email</th>
-            <th>Age</th>
+            <th>Ages</th>
             <th>Created At</th>
+            
           </tr>
         </thead>
         <tbody>
