@@ -23,8 +23,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           #cache: 'npm'
 
-      - name: "Install Server Dependencies"
-        working-directory: ./server
+      - name: "Install Backend Dependencies"
+        working-directory: ./backend
         run: npm install
 
       - name: "Install Frontend Dependencies"
