@@ -20,9 +20,9 @@ function App() {
       <table>
         <thead>
           <tr>
-            <th>IDs</th>
+            <th>ID</th>
             <th>Names</th>
-            <th>Emails</th>
+            <th>Email</th>
             <th>Ages</th>
             <th>Created At</th>
           </tr>
